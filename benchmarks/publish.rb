@@ -9,7 +9,7 @@ OrderCreated = Class.new(RailsEventStore::Event)
 SEARCH_PATH = Pathname.new(File.expand_path("../../apps/*", __FILE__))
 BASE_PATH   = Pathname.new(File.expand_path("../..", __FILE__))
 
-targets = Dir[SEARCH_PATH].map { |path| Pathname.new(path).relative_path_from(BASE_PATH).to_s.split("/")[1] }
+targets = Dir[SEARCH_PATH].map { |path| Pathname.new(path).relative_path_from(BASE_PATH).to_s.split("/")[1] }.sort
 
 Benchmark.ips do |x|
   targets.each do |target|

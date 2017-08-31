@@ -16,7 +16,7 @@ EVENTS_IN_STREAM.times do
   es.publish_event(OrderCreated.new(data: { customer: "alice" }), stream_name: STREAM_NAME)
 end
 
-targets = Dir[SEARCH_PATH].map { |path| Pathname.new(path).relative_path_from(BASE_PATH).to_s.split("/")[1] }
+targets = Dir[SEARCH_PATH].map { |path| Pathname.new(path).relative_path_from(BASE_PATH).to_s.split("/")[1] }.sort
 
 Benchmark.ips do |x|
   targets.each do |target|
