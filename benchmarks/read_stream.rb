@@ -13,7 +13,11 @@ SEARCH_PATH = Pathname.new(File.expand_path("../../apps/*", __FILE__))
 BASE_PATH   = Pathname.new(File.expand_path("../..", __FILE__))
 
 EVENTS_IN_STREAM.times do
-  es.publish_event(OrderCreated.new(data: { customer: "alice" }), stream_name: STREAM_NAME)
+  if Gem::Version.new(RailsEventStore::VERSION) >= Gem::Version.new("0.12.0")
+    es.publish_event(OrderCreated.new(data: { customer: "alice" }), stream_name: STREAM_NAME)
+  else
+    es.publish_event(OrderCreated.new(data: { customer: "alice" }), STREAM_NAME)
+  end
 end
 
 targets = Dir[SEARCH_PATH].map { |path| Pathname.new(path).relative_path_from(BASE_PATH).to_s.split("/")[1] }.sort
