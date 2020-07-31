@@ -21,7 +21,7 @@ Dir.mktmpdir do |dir|
   system("bundle install --gemfile=#{gemfile}")
 
   VERSIONS.each do |name, gem_opts|
-    system({"BUNDLE_GEMFILE" => gemfile}, "bundle exec rails new #{name} --skip-spring")
+    system({"BUNDLE_GEMFILE" => gemfile}, "bundle exec rails new #{name} --skip-spring --database=postgresql")
     File.open("#{name}/Gemfile", "a") do |f|
       f.puts("gem 'rails_event_store', #{gem_opts.inspect}")
       f.puts("gem 'benchmark-ips'")
