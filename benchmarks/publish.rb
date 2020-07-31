@@ -14,7 +14,7 @@ targets = Dir[SEARCH_PATH].map { |path| Pathname.new(path).relative_path_from(BA
 Benchmark.ips do |x|
   targets.each do |target|
     x.report(target) do
-      es.publish_event(OrderCreated.new(data: { customer: "alice" }), stream_name: "s1")
+      es.publish(OrderCreated.new(data: { customer: "alice" }), stream_name: "s1")
     end
 
     x.hold! File.expand_path("../ips-state", __FILE__)

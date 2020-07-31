@@ -3,6 +3,7 @@
 set -e
 
 rm -f benchmarks/ips-state
+touch benchmarks/ips-state
 
 TARGETS=$(ls -1 apps)
 
