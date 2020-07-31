@@ -2,7 +2,7 @@ require "benchmark/ips"
 require "securerandom"
 require "pathname"
 
-EVENTS_IN_STREAM = 200_000
+EVENTS_IN_STREAM = 600_000
 STREAM_NAME = "test-stream"
 
 es = RailsEventStore::Client.new
